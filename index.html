@@ -1,0 +1,76 @@
+<html>
+
+    <head>
+        <title>Teste</title>
+        <script type="text/javascript">
+
+			function f(x)
+			{
+                let a = document.getElementById("a");
+                let b = document.getElementById("b");
+                let c = document.getElementById("c");
+                let va = parseInt(a.value);
+                let vb = parseInt(b.value);
+                let vc = parseInt(c.value);
+				return yt(va*x**2+vb*x+vc);
+			}
+
+			function f__(x)
+			{
+				return yt(50*Math.cos(x));
+			}
+
+			function yt(y)
+			{
+				return -5*y/2; // -((h/(xf-x0))*y)
+			}
+
+			function xt(x)
+			{
+				return 25*x; // (w/(xf-x0))*x
+			}
+
+            function main() 
+            {
+		        var canvas, ctx, w, h;
+		        w = 500;
+		        h = 500;
+		        canvas = document.getElementById("canvas1");
+		        ctx = canvas.getContext("2d");
+				var x0 = -10;
+				var xf = 10;
+				var x = x0;
+				var dx = 0.1;
+				ctx.save();
+				ctx.translate(250,250);
+				ctx.beginPath();
+				ctx.moveTo(xt(-10),yt(0));
+				ctx.lineTo(xt(10),yt(0));
+				ctx.moveTo(xt(0),yt(-100));
+				ctx.lineTo(xt(0),yt(100));
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.moveTo(xt(x0),f(x0));
+				x+= dx;
+				while(x<xf)
+				{
+					ctx.lineTo(xt(x),f(x))
+					x+= dx;
+				}
+				ctx.stroke();
+				ctx.restore();
+		    }
+
+        </script>
+    </head>
+
+    <body>
+        <h1>Função de Segundo Grau</h1>
+        <p>A: <input type="text" id="a"></p>
+        <p>B: <input type="text" id="b"></p>
+        <p>C: <input type="text" id="c"></p>
+        <p><button onclick="main()">Função</button></p>
+        <canvas id="canvas1" width="500" height="500" style="border:1px black solid;"></canvas>
+    </body>
+
+</html>
